@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100d16">
+  <meta name="description" content="Promociones de Halloween para óptica y ruleta informativa.">
+  <title>Halloween Óptica | Una mirada de miedo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="hero">
+      <div class="eyebrow">🎃 HALLOWEEN · EDICIÓN ESPECIAL</div>
+      <h1>Una mirada <span>de miedo</span></h1>
+      <p class="subtitle">PROMOCIONES DE TEMPORADA</p>
+      <div class="hero-bats" aria-hidden="true">✦　🦇　✦　🕸️　✦</div>
+    </header>
+
+    <nav class="tabs" aria-label="Secciones principales">
+      <button class="tab active" id="promosTab" type="button" aria-selected="true">Promociones</button>
+      <button class="tab" id="wheelTab" type="button" aria-selected="false">🎡 Ruleta</button>
+    </nav>
+
+    <section id="promotions" class="panel">
+      <div class="promo-grid">
+        <article class="promo-card orange">
+          <div class="promo-icon" aria-hidden="true">👓</div>
+          <div><p class="promo-kicker">MIRA Y AHORRA</p><h2>20% de descuento</h2><p>En todos los lentes</p></div>
+          <span class="card-spark" aria-hidden="true">✦</span>
+        </article>
+        <article class="promo-card purple">
+          <div class="promo-icon" aria-hidden="true">🕶️</div>
+          <div><p class="promo-kicker">CAMBIA TU ESTILO</p><h2>50% de descuento</h2><p>En todas las monturas</p></div>
+          <span class="card-spark" aria-hidden="true">✦</span>
+        </article>
+        <article class="promo-card green">
+          <div class="promo-icon" aria-hidden="true">🎁</div>
+          <div><p class="promo-kicker">UNA SORPRESA</p><h2>Sorpresa</h2><p>Descubre el resultado informativo de la ruleta.</p></div>
+          <span class="card-spark" aria-hidden="true">✦</span>
+        </article>
+        <article class="promo-card bone">
+          <div class="promo-icon" aria-hidden="true">🦇</div>
+          <div><p class="promo-kicker">NO TE RINDAS</p><h2>Intenta de nuevo</h2><p>¡Vuelve a probar la ruleta informativa!</p></div>
+          <span class="card-spark" aria-hidden="true">✦</span>
+        </article>
+        <article class="promo-card teal">
+          <div class="promo-icon" aria-hidden="true">🧡</div>
+          <div><p class="promo-kicker">DETALLE ESPECIAL</p><h2>Reclama kit</h2><p>Consulta disponibilidad y condiciones en tienda.</p></div>
+          <span class="card-spark" aria-hidden="true">✦</span>
+        </article>
+      </div>
+      <button class="primary-button" id="goWheel" type="button">🎃 GIRAR LA RULETA <span>→</span></button>
+    </section>
+
+    <section id="wheelSection" class="panel hidden">
+      <div class="wheel-heading">
+        <p class="eyebrow">EL MOMENTO DE LA SUERTE</p>
+        <h2>La ruleta del terror</h2>
+        <p>Gira para descubrir un resultado informativo</p>
+      </div>
+      <div class="wheel-layout">
+        <div class="wheel-wrap">
+          <div class="pointer" aria-hidden="true"></div>
+          <canvas id="wheelCanvas" width="700" height="700" role="img" aria-label="Ruleta con seis resultados promocionales"></canvas>
+          <div class="wheel-center" aria-hidden="true">🎃</div>
+        </div>
+        <div class="wheel-controls">
+          <div id="result" class="result-card" aria-live="polite">
+            <span class="result-label">TU RESULTADO</span>
+            <strong id="resultTitle">¿Listo para girar?</strong>
+            <span id="resultDetail">Pulsa el botón para comenzar.</span>
+          </div>
+          <button class="primary-button" id="spinButton" type="button">🎡 GIRAR RULETA</button>
+          <button class="secondary-button" id="resetButton" type="button">↺ REINICIAR</button>
+          <p class="tiny-note">Por compra de tu fórmula</p>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- Ventana emergente del resultado de la ruleta -->
+    <div id="resultModal" class="result-modal" role="dialog" aria-modal="true"
+         aria-labelledby="modalResultTitle" aria-describedby="modalResultDetail" aria-hidden="true">
+      <div class="modal-backdrop" data-close-modal="true"></div>
+      <section class="result-modal-card" id="resultModalCard" role="document">
+        <button class="modal-close" id="closeResultModal" type="button" aria-label="Cerrar resultado">×</button>
+        <div class="modal-decor" id="modalDecor" aria-hidden="true">✦ 🎃 ✦</div>
+        <div class="modal-result-icon" id="modalResultIcon" aria-hidden="true">🎁</div>
+        <p class="modal-kicker" id="modalKicker">¡LA RULETA HA HABLADO!</p>
+        <h2 id="modalResultTitle">TU RESULTADO</h2>
+        <p id="modalResultDetail" class="modal-result-detail"></p>
+        <p class="modal-footnote">Resultado informativo. Consulta en tienda las condiciones y disponibilidad.</p>
+        <div class="modal-actions">
+          <button class="primary-button" id="spinAgainButton" type="button">🎡 GIRAR OTRA VEZ</button>
+          <button class="secondary-button" id="modalDoneButton" type="button">CERRAR</button>
+        </div>
+        <div class="modal-effects" id="modalEffects" aria-hidden="true"></div>
+      </section>
+    </div>
+
+    <footer class="disclaimer">
+      <span class="disclaimer-icon" aria-hidden="true">ⓘ</span>
+      <p><strong>Importante:</strong> esta ruleta es de carácter informativo. El giro no entrega premios reales ni garantiza un beneficio. Cualquier promoción debe confirmarse en tienda al presentar la compra de tu fórmula. Aplican condiciones y disponibilidad.</p>
+    </footer>
+    <div class="footer-brand">HALLOWEEN ÓPTICA <span>·</span> UNA MIRADA DIFERENTE</div>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
