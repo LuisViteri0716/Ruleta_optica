@@ -58,7 +58,8 @@ button:focus-visible { outline: 3px solid var(--acid); outline-offset: 4px; }
 .wheel-wrap { width: min(100%, 480px); aspect-ratio: 1; position: relative; margin: auto; filter: drop-shadow(0 20px 40px rgba(0,0,0,.4)); }
 #wheelCanvas { display: block; width: 100%; height: 100%; transform: rotate(0deg); }
 .pointer { position: absolute; z-index: 3; left: 50%; top: -2px; transform: translateX(-50%); width: 0; height: 0; border-left: 18px solid transparent; border-right: 18px solid transparent; border-top: 34px solid var(--bone); filter: drop-shadow(0 3px 2px #000); }
-.wheel-center { position: absolute; z-index: 2; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 18%; aspect-ratio: 1; display: grid; place-items: center; border: 6px solid var(--bone); border-radius: 50%; background: var(--black); font-size: clamp(1.2rem, 4vw, 2rem); box-shadow: 0 4px 14px rgba(0,0,0,.4); pointer-events: none; }
+.wheel-center { position: absolute; z-index: 2; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 27%; aspect-ratio: 1; display: grid; place-items: center; border: 6px solid var(--bone); border-radius: 50%; background: var(--black); font-size: clamp(1.2rem, 4vw, 2rem); box-shadow: 0 4px 14px rgba(0,0,0,.4); pointer-events: none; }
+.wheel-center img { display: block; width: 100%; height: 100%; padding: 3px; object-fit: contain; border-radius: 50%; background: #fff; }
 .wheel-controls { width: 100%; max-width: 390px; margin: auto; }
 .result-card { min-height: 138px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 20px; text-align: center; background: linear-gradient(140deg, rgba(143,85,199,.24), transparent), var(--card); border: 1px solid var(--line); border-radius: 20px; }
 .result-label { color: var(--acid); font-size: .7rem; letter-spacing: .18em; font-weight: 900; }
@@ -183,4 +184,71 @@ body.modal-open { overflow: hidden; }
 }
 @media (prefers-reduced-motion: reduce) {
   .result-modal, .result-modal-card, .modal-result-icon, .effect-particle { animation: none !important; transition: none !important; }
+}
+
+
+/* Ajuste puntual: ampliar la ruleta solo durante la animación, sin alterar el diseño normal. */
+body.wheel-spinning { overflow: hidden; }
+body.wheel-spinning #wheelSection {
+  isolation: isolate;
+  display: flex !important;
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  margin: 0;
+  padding: 10px;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 15% 5%, rgba(143,85,199,.20), transparent 35rem),
+    radial-gradient(ellipse at 90% 40%, rgba(255,117,24,.12), transparent 34rem),
+    var(--black);
+}
+body.wheel-spinning #wheelSection::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  background: url("logo-optica.jpg") center / min(68vmin, 620px) auto no-repeat;
+  opacity: .12;
+  filter: grayscale(1);
+}
+body.wheel-spinning .wheel-heading { display: none; }
+body.wheel-spinning .wheel-layout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+}
+body.wheel-spinning .wheel-wrap {
+  width: min(94vw, 92vh, 1000px);
+  width: min(94vw, 92dvh, 1000px);
+  max-width: none;
+  flex: 0 1 auto;
+  margin: 0;
+}
+body.wheel-spinning .wheel-controls {
+  position: fixed;
+  z-index: 902;
+  left: 50%;
+  bottom: max(12px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  width: min(300px, 72vw);
+  max-width: 300px;
+  margin: 0;
+}
+body.wheel-spinning .wheel-controls .result-card,
+body.wheel-spinning .wheel-controls .secondary-button,
+body.wheel-spinning .wheel-controls .tiny-note { display: none; }
+body.wheel-spinning .wheel-controls .primary-button { margin-top: 0; min-height: 48px; }
+@media (orientation: landscape) {
+  body.wheel-spinning .wheel-wrap { width: min(84vh, 88vw, 1000px); width: min(84dvh, 88vw, 1000px); }
 }

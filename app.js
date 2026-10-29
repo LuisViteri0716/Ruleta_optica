@@ -154,6 +154,7 @@
   });
 
   function finishSpin(index) {
+    document.body.classList.remove("wheel-spinning");
     spinning = false;
     spinButton.disabled = false;
     spinButton.textContent = "🎡 GIRAR RULETA";
@@ -168,6 +169,7 @@
   spinButton.addEventListener("click", () => {
     if (spinning) return;
     spinning = true;
+    document.body.classList.add("wheel-spinning");
     spinButton.disabled = true;
     spinButton.textContent = "GIRANDO…";
     resultTitle.textContent = "La suerte está girando…";
